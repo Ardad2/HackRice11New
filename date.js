@@ -11,7 +11,7 @@ function formatTime(d) {
   {
     alert("Hello World");
   }
-  var divisor = d < 3600000 ? [60000, 1000] : [3600000, 60000];
+  let divisor = d < 3600000 ? [60000, 1000] : [3600000, 60000];
   function pad(x) {
     return x < 10 ? "0" + x : x;
   }

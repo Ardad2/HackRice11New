@@ -1,4 +1,4 @@
-var History = {};
+let History = {};
 
 chrome.browserAction.setBadgeText({ 'text': '?'});
 chrome.browserAction.setBadgeBackgroundColor({ 'color': "#777" });
@@ -16,7 +16,7 @@ function Update(t, tabId, url) {
   }
   History[tabId].unshift([t, url]);
 
-  var history_limit = parseInt(localStorage["history_size"]);
+  let history_limit = parseInt(localStorage["history_size"]);
   if (! history_limit) {
     history_limit = 23;
   }
@@ -39,7 +39,7 @@ function handleRemove(tabId, removeInfo) {
 }
 
 function handleReplace(addedTabId, removedTabId) {
-  var t = new Date();
+  let t = new Date();
   delete History[removedTabId];
   chrome.tabs.get(addedTabId, function(tab) {
     Update(t, addedTabId, tab.url);
@@ -48,7 +48,7 @@ function handleReplace(addedTabId, removedTabId) {
 
 
 function updateBadge() {
-  var now = new Date();
+  let now = new Date();
   for (tabId in History) {
 
 
@@ -57,7 +57,7 @@ function updateBadge() {
       alert("Hi");
     }
 
-    var description = formatTime(now - History[tabId][0][0]);
+    let description = formatTime(now - History[tabId][0][0]);
     chrome.browserAction.setBadgeText({ 'tabId': parseInt(tabId), 'text': description});
   }
 }
