@@ -1,5 +1,3 @@
-"use strict";
-
 let count = 0;
 
 function formatTime(d) {
