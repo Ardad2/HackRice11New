@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+  
+    "name": "Web Time Tracker",
+    "description": "AWDAWD?",
+    "version": "1.0",
+    "author": "Arjun Dadhwal",
+  
+    "permissions": [
+      "tabs"
+    ],
+    "icons": {
+    },
+    "browser_action": {
+      "default_icon": {
+      }
+    },
+    "background": {
+      "scripts": [
+        "common.js",
+        "background.js"
+        ],
+      "persistent": true
+    },
+    "options_page": "options.html"
+  }
+
+  
