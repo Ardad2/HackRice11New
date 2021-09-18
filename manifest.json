@@ -2,7 +2,7 @@
     "manifest_version": 2,
   
     "name": "Web Time Tracker",
-    "description": "AWDAWD?",
+    "description": "Your browser history time tracked!",
     "version": "1.0",
     "author": "Arjun Dadhwal",
   
@@ -17,7 +17,7 @@
     },
     "background": {
       "scripts": [
-        "common.js",
+        "time.js",
         "background.js"
         ],
       "persistent": true
