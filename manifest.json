@@ -15,18 +15,12 @@
       "default_icon": {
       }
     },
-    "content_scripts": [{
-      "css": ["styles.css"],
-      "js": ["content.js"]
-    }],
     "background": {
       "scripts": [
-        "time.js",
+        "timeFormat.js",
         "background.js"
         ],
       "persistent": true
     },
     "options_page": "options.html"
   }
-
-  

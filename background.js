@@ -1,3 +1,5 @@
+var BlackListed = new Set();
+
 var Table = {};
 
 chrome.browserAction.setBadgeText({ 'text': '?'});
@@ -10,6 +12,16 @@ function Update(t, tabId, url) {
   }
 
   url = url.match(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img);
+  
+  if (BlackListed.has(url))
+  {
+    alert("This site has been blackListed!")
+    {
+      chrome.tabs.query({active:true,currentWindow:true},function(tabs){
+        chrome.tabs.remove(tabs[0].id);
+    });
+    }
+  }
 
   if (tabId in Table) {
     if (url === Table[tabId][0][1]) {
