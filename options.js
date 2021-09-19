@@ -1,7 +1,7 @@
 function save_options() {
     localStorage["history_size"] = document.getElementById("history_size").value;
   
-    let status = document.getElementById("status");
+    var status = document.getElementById("status");
     status.innerHTML = "Options Saved.";
     setTimeout(function() {
       status.innerHTML = "";
@@ -9,7 +9,7 @@ function save_options() {
   }
   
   function restore_options() {
-    let history_size = localStorage["history_size"];
+    var history_size = localStorage["history_size"];
     if (!history_size) {
       return;
     }

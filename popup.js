@@ -1,12 +1,26 @@
-let tabId_re = /tabId=([0-9]+)/;
-let match = tabId_re.exec(window.location.hash);
+var tabId_re = /tabId=([0-9]+)/;
+var match = tabId_re.exec(window.location.hash);
 if (match) {
-  let hist = chrome.extension.getBackgroundPage().History[match[1]];
-  let table = document.createElement("table");
-  for (let i=0; i < hist.length; i++) {
-    let r = table.insertRow(-1);
+  var hist = chrome.extension.getBackgroundPage().Table[match[1]];
+  var table = document.createElement("table");
+  var header = table.createTHead();
+  var firstRow = header.insertRow(0);
 
-    let date = "";
+  var first = "Date";
+  var second = "Time";
+  var third =  "Duration";
+  var fourth = "Url";
+
+  firstRow.insertCell(-1).textContent = first;
+  firstRow.insertCell(-1).textContent = second;
+  firstRow.insertCell(-1).textContent = third;
+  firstRow.insertCell(-1).textContent = fourth;
+
+
+  for (var i=0; i < hist.length; i++) {
+    var r = table.insertRow(-1);
+
+    var date = "";
     if (i == hist.length - 1 ||
         (hist[i][0].toLocaleDateString() != hist[i+1][0].toLocaleDateString())) {
       date = hist[i][0].toLocaleDateString();
@@ -15,7 +29,7 @@ if (match) {
 
     r.insertCell(-1).textContent = hist[i][0].toLocaleTimeString();
 
-    let end_time;
+    var end_time;
     if (i == 0) {
       end_time = new Date();
     } else {
@@ -23,7 +37,7 @@ if (match) {
     }
     r.insertCell(-1).textContent = formatTime(end_time - hist[i][0]);
 
-    let a = document.createElement("a");
+    var a = document.createElement("a");
     a.textContent = hist[i][1];
     a.setAttribute("href", hist[i][1]);
     a.setAttribute("target", "_blank");

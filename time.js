@@ -5,9 +5,9 @@ function formatTime(d) {
   if (d < 0) {
     return "?";
   }
-  if (d > 60000 )
+  if (d > 10000 && d < 11000)
   {
-    alert("Hello World");
+    alert("Warning! You've spent too much time on this page! Time to take a break!")
   }
   let divisor = d < 3600000 ? [60000, 1000] : [3600000, 60000];
   function pad(x) {
