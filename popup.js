@@ -1,47 +1,36 @@
 var tabId_re = /tabId=([0-9]+)/;
 var match = tabId_re.exec(window.location.hash);
 if (match) {
-  var hist = chrome.extension.getBackgroundPage().Table[match[1]];
+  var hisTable = chrome.extension.getBackgroundPage().Table[match[1]];
   var table = document.createElement("table");
   var header = table.createTHead();
   var firstRow = header.insertRow(0);
 
-  var first = "Date";
-  var second = "Time";
-  var third =  "Duration";
-  var fourth = "Url";
-
-  firstRow.insertCell(-1).textContent = first;
-  firstRow.insertCell(-1).textContent = second;
-  firstRow.insertCell(-1).textContent = third;
-  firstRow.insertCell(-1).textContent = fourth;
+  firstRow.insertCell(-1).textContent = "S.No";
+  firstRow.insertCell(-1).textContent = "Time";
+  firstRow.insertCell(-1).textContent = "Duration";
+  firstRow.insertCell(-1).textContent = "Website";
 
 
-  for (var i=0; i < hist.length; i++) {
-    var r = table.insertRow(-1);
+  for (var i=0; i < hisTable.length; i++) {
+    var row = table.insertRow(-1);
 
-    var date = "";
-    if (i == hist.length - 1 ||
-        (hist[i][0].toLocaleDateString() != hist[i+1][0].toLocaleDateString())) {
-      date = hist[i][0].toLocaleDateString();
-    }
-    r.insertCell(-1).textContent = date;
-
-    r.insertCell(-1).textContent = hist[i][0].toLocaleTimeString();
+    row.insertCell(-1).textContent = (i+1);
+    row.insertCell(-1).textContent = hisTable[i][0].toLocaleTimeString();
 
     var end_time;
     if (i == 0) {
       end_time = new Date();
     } else {
-      end_time = hist[i-1][0];
+      end_time = hisTable[i-1][0];
     }
-    r.insertCell(-1).textContent = formatTime(end_time - hist[i][0]);
+    row.insertCell(-1).textContent = formatTime(end_time - hisTable[i][0]);
 
-    var a = document.createElement("a");
-    a.textContent = hist[i][1];
-    a.setAttribute("href", hist[i][1]);
-    a.setAttribute("target", "_blank");
-    r.insertCell(-1).appendChild(a);
+    var newWebsite = document.createElement("a");
+    newWebsite.textContent = hisTable[i][1];
+    newWebsite.setAttribute("href", hisTable[i][1]);
+    newWebsite.setAttribute("target", "_blank");
+    row.insertCell(-1).appendChild(newWebsite);
   }
   document.body.appendChild(table);
 }
